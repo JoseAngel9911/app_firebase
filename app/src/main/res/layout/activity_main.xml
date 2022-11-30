@@ -40,6 +40,7 @@
             android:ems="10"
             android:hint="Identificador"
             android:inputType="number"
+            android:minHeight="48dp"
             android:textAlignment="textStart" />
 
         <Button
@@ -57,6 +58,7 @@
         android:ems="10"
         android:hint="Nombre "
         android:inputType="textPersonName"
+        android:minHeight="48dp"
         android:textAlignment="textStart" />
 
     <EditText
@@ -66,6 +68,7 @@
         android:ems="10"
         android:hint="Telefono"
         android:inputType="textPersonName"
+        android:minHeight="48dp"
         android:textAlignment="textStart" />
 
     <EditText
@@ -75,6 +78,7 @@
         android:ems="10"
         android:hint="Correo"
         android:inputType="textPersonName"
+        android:minHeight="48dp"
         android:textAlignment="textStart" />
 
     <LinearLayout
