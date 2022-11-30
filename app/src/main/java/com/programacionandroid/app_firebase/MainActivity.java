@@ -3,10 +3,14 @@ package com.programacionandroid.app_firebase;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethod;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -19,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText txtIdV, txtNombreV, txtTelefonoV, txtCorreoV;
     Button btnBuscarV, btnModificarV, btnEliminarV, btnRegistrarV;
+    ListView lvDatosV;
 
 
     @Override
@@ -26,15 +31,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        txtIdV = findViewById(R.id.txtId);
-        txtNombreV = findViewById(R.id.txtNombre);
-        txtTelefonoV = findViewById(R.id.txtTelefono);
-        txtCorreoV = findViewById(R.id.txtCorreo);
+        txtIdV = (EditText) findViewById(R.id.txtId);
+        txtNombreV = (EditText) findViewById(R.id.txtNombre);
+        txtTelefonoV = (EditText) findViewById(R.id.txtTelefono);
+        txtCorreoV = (EditText) findViewById(R.id.txtCorreo);
 
-        btnBuscarV = findViewById(R.id.btnBuscar);
-        btnModificarV = findViewById(R.id.btnModificar);
-        btnEliminarV = findViewById(R.id.btnEliminar);
-        btnRegistrarV = findViewById(R.id.btnRegistrar);
+        btnBuscarV =  (Button) findViewById(R.id.btnBuscar);
+        btnModificarV = (Button) findViewById(R.id.btnModificar);
+        btnEliminarV = (Button) findViewById(R.id.btnEliminar);
+        btnRegistrarV = (Button) findViewById(R.id.btnRegistrar);
+        lvDatosV = findViewById(R.id.lvDatos);
+
+        this.botonRegistrar();
 
     }
 
@@ -51,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                     String nombre = txtNombreV.getText().toString();
                     String telefono = txtTelefonoV.getText().toString();
                     String correo = txtCorreoV.getText().toString();
+
 
                     FirebaseDatabase db = FirebaseDatabase.getInstance();
                     DatabaseReference dbref = db.getReference(Agenda.class.getSimpleName());
@@ -97,9 +106,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void limpiar() {
+        txtIdV.setText("");
+        txtNombreV.setText("");
+        txtCorreoV.setText("");
+        txtTelefonoV.setText("");
     }
 
     public void ocultarTeclado() {
+        View view = this.getCurrentFocus();
+        if(view != null){
+            InputMethodManager imn = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imn.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
 
